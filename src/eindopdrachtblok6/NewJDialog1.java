@@ -43,7 +43,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jComboBox5 = new javax.swing.JComboBox<>();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,13 +108,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
             }
         });
 
-        jRadioButton3.setText("Aantal hosts");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Sorting");
 
         jLabel6.setText("Overeenkomsten");
@@ -132,7 +124,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
-        jButton2.setText("Proces");
+        jButton2.setText("Process");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -156,9 +148,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jRadioButton3))
+                            .addComponent(jRadioButton2)
                             .addComponent(jLabel1)
                             .addComponent(jRadioButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
@@ -222,9 +212,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton3)))
+                        .addComponent(jRadioButton2)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -837,16 +825,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-        if (l == 0) {
-            l = 1;
-        } else {
-            l = 0;
-        }
-
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -906,7 +884,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private static javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
