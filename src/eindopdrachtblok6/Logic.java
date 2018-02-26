@@ -26,6 +26,7 @@ public class Logic {
     static public ArrayList<String> HostLijst = new ArrayList<>();
     static public ArrayList<String> VirusLijst = new ArrayList<>();
     static public ArrayList<String> Virus2Lijst = new ArrayList<>();
+    static public ArrayList<String> CompareList = new ArrayList<>();
 
 //readfile method, returned arraylist met Virus objecten
     public static ArrayList<Virus> ReadFile() throws FileNotFoundException, IOException {
@@ -80,6 +81,7 @@ public class Logic {
     }
 
     //////////////////////////////////
+    /*
     //VirusLijst
     public static ArrayList<String> Virus1(String HostName) {
         //System.out.println(HostName);
@@ -377,7 +379,7 @@ public class Logic {
         //System.out.println(VirusTempLijst);
         return Virus2Lijst;
     }
-
+*/
     public static ArrayList<String> Test(int J, int K, int L, String HostName, String Class) {
         VirusLijst.clear();
 
@@ -406,4 +408,22 @@ public class Logic {
         return VirusLijst;
     }
 
+   
+
+    static ArrayList<String> Compare(ArrayList<String> VirusLijst1, ArrayList<String> VirusLijst2) {
+        CompareList.clear();
+        for (int i = 0; i < VirusLijst1.size(); i++) {
+            for (int k = 0; k < VirusLijst2.size(); k++) {
+                if (VirusLijst1.get(i).equals(VirusLijst2.get(k))) {
+                    CompareList.add(VirusLijst1.get(i));
+                }
+            }
+        }
+        
+        return CompareList;
+    }
+    
+    
+    
+    
 }
