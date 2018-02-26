@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
@@ -62,8 +63,6 @@ public class Logic {
         return Lijst;
     }
 
-    
-    
     //HostLijst aanmaken
     public static ArrayList<String> Host() {
         for (int i = 1; i < Lijst.size(); i++) {
@@ -79,9 +78,6 @@ public class Logic {
         }
         return HostLijst;
     }
-    
-    
-    
 
     //////////////////////////////////
     //VirusLijst
@@ -380,6 +376,34 @@ public class Logic {
         }
         //System.out.println(VirusTempLijst);
         return Virus2Lijst;
+    }
+
+    public static ArrayList<String> Test(int J, int K, int L, String HostName, String Class) {
+        VirusLijst.clear();
+
+        for (int i = 0; i < Lijst.size(); i++) {
+            Virus a = Lijst.get(i);
+
+            if (J == 1) {
+
+                if (HostName.equals(a.getHostName())) {
+                    if (a.getLineage().contains(Class)) {
+                        VirusLijst.add(a.getID());
+                    }
+                }
+            } else {
+                if (HostName.equals(a.getHostName())) {
+                    VirusLijst.add(a.getID());
+                }
+            }
+        }
+            
+        
+        if (K==1){
+            Collections.sort(VirusLijst);
+        }
+        
+        return VirusLijst;
     }
 
 }
