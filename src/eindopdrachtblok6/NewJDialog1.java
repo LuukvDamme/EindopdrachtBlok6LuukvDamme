@@ -76,12 +76,12 @@ public class NewJDialog1 extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ssDNA", "dsDNA", "ssRNA", "dsRNA", "RetroVirus", "Satellite", "Viroids", "Unclassified" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ssDNA", "dsDNA", "ssRNA", "dsRNA", "Retro-transcribing viruses", "Satellites", "Viroids", "Unclassified" }));
         jComboBox1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jComboBox1InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +264,41 @@ public class NewJDialog1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBox1InputMethodTextChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String Class = jComboBox1.getSelectedItem().toString();
+        jTextArea1.selectAll();
+        jTextArea1.replaceSelection("");
+        jTextArea2.selectAll();
+        jTextArea2.replaceSelection("");
+        String HostName1 = jComboBox4.getSelectedItem().toString();
+        ArrayList<String> VirusLijst1 = Logic.Test(j,k,l,HostName1,Class);
+        
+        
+        for (int i = 0; i < VirusLijst1.size(); i++) {
+                //  System.out.println(VirusLijst.get(i));
+                jTextArea2.append(VirusLijst1.get(i));
+                jTextArea2.append("\n");
+
+            }
+        
+        String HostName2 = jComboBox5.getSelectedItem().toString();
+        ArrayList<String> VirusLijst2 = Logic.Test(j,k,l,HostName2,Class);
+        
+        for (int i = 0; i < VirusLijst2.size(); i++) {
+                //  System.out.println(VirusLijst.get(i));
+                jTextArea1.append(VirusLijst2.get(i));
+                jTextArea1.append("\n");
+
+            }
+        
+        
+        
+        
+        /*
+        
+        
+        
+        
+        
         if (k == 1) {
             jTextArea2.selectAll();
             jTextArea2.replaceSelection("");
@@ -823,6 +858,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                 }
             }
         }
+        */
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

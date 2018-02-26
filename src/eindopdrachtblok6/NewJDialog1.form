@@ -164,8 +164,8 @@
             <StringItem index="1" value="dsDNA"/>
             <StringItem index="2" value="ssRNA"/>
             <StringItem index="3" value="dsRNA"/>
-            <StringItem index="4" value="RetroVirus"/>
-            <StringItem index="5" value="Satellite"/>
+            <StringItem index="4" value="Retro-transcribing viruses"/>
+            <StringItem index="5" value="Satellites"/>
             <StringItem index="6" value="Viroids"/>
             <StringItem index="7" value="Unclassified"/>
           </StringArray>
