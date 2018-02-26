@@ -269,6 +269,9 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jTextArea1.replaceSelection("");
         jTextArea2.selectAll();
         jTextArea2.replaceSelection("");
+        jTextArea3.selectAll();
+        jTextArea3.replaceSelection("");
+        
         String HostName1 = jComboBox4.getSelectedItem().toString();
         ArrayList<String> VirusLijst1 = Logic.Test(j,k,l,HostName1,Class);
         
@@ -284,15 +287,16 @@ public class NewJDialog1 extends javax.swing.JDialog {
         ArrayList<String> VirusLijst2 = Logic.Test(j,k,l,HostName2,Class);
         
         for (int i = 0; i < VirusLijst2.size(); i++) {
-                //  System.out.println(VirusLijst.get(i));
                 jTextArea1.append(VirusLijst2.get(i));
                 jTextArea1.append("\n");
 
             }
         
-        
-        
-        
+        ArrayList<String> CompareList=Logic.Compare(VirusLijst1, VirusLijst2);
+        for (int i = 0; i < CompareList.size(); i++) {
+                jTextArea3.append(CompareList.get(i));
+                jTextArea3.append("\n");
+        }
         /*
         
         
