@@ -9,7 +9,7 @@ package eindopdrachtblok6;
  * @since 07/02/2018
  * @author Luuk
  */
-public class Virus {
+public class Virus implements Comparable{
     private String ID;
     private String Name;
     private String Lineage;
@@ -119,5 +119,15 @@ public class Virus {
 
     public String getEvidence() {
         return Evidence;
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        if (t instanceof Virus){
+            String IDname1 = this.ID;
+            String IDname2 = ((Virus) t).getID();
+            return IDname1.compareTo(IDname2);
+        }
+        return 0;
     }
 }
