@@ -97,6 +97,11 @@ public class Logic {
      * sorteren als radiobutton classificatie is geselecteerd kan deze methode
      * de arraylist filtreren op de classificatie
      *
+     * @param J
+     * @param K
+     * @param L
+     * @param HostName
+     * @param Class
      * @return Arraylist met virus ID's
      */
     public static ArrayList<String> Test(int J, int K, int L, String HostName, String Class) {
