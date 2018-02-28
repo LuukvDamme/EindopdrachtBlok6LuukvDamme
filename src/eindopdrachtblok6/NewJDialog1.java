@@ -1,15 +1,15 @@
 /*
  * GUI gegenereerd met de GUI designer
- * Hierin worden methods uit Logic aan geroepen onder jButton2ActionPerformed
+ * Hierin worden methods uit Logic aan geroepen
  * 
  */
 package eindopdrachtblok6;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * @since 07/02/2018
@@ -54,6 +54,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -135,6 +136,13 @@ public class NewJDialog1 extends javax.swing.JDialog {
 
         jLabel8.setText("Virus Lijst 1");
 
+        jRadioButton3.setText("Aantal hosts");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,8 +158,9 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton2)
                             .addComponent(jLabel1)
-                            .addComponent(jRadioButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton3))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +184,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +221,9 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)))
+                        .addComponent(jRadioButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton3)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -225,15 +236,22 @@ public class NewJDialog1 extends javax.swing.JDialog {
             ArrayList<Virus> Lijst = Logic.ReadFile();
         } catch (IOException ex) {
             Logger.getLogger(NewJDialog1.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "fout bij bestand lezen");
         }
 
         jComboBox4.removeAll();
         jComboBox5.removeAll();
-        ArrayList<String> HostLijst = Logic.Host();
-        for (int i = 1; i < HostLijst.size(); i++) {
-            jComboBox4.addItem(HostLijst.get(i));
-            jComboBox5.addItem(HostLijst.get(i));
+        try {
+            ArrayList<String> HostLijst = Logic.Host();
+            for (int i = 1; i < HostLijst.size(); i++) {
+                jComboBox4.addItem(HostLijst.get(i));
+                jComboBox5.addItem(HostLijst.get(i));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "fout bij de host lijst aanmaken");
         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -243,7 +261,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
         } else {
             j = 0;
         }
-
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -271,599 +288,42 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jTextArea2.replaceSelection("");
         jTextArea3.selectAll();
         jTextArea3.replaceSelection("");
-        
+
         String HostName1 = jComboBox4.getSelectedItem().toString();
-        ArrayList<String> VirusLijst1 = Logic.Test(j,k,l,HostName1,Class);
-        
-        
+
+        ArrayList<String> VirusLijst1 = Logic.Test(j, k, l, HostName1, Class);
+
         for (int i = 0; i < VirusLijst1.size(); i++) {
-                //  System.out.println(VirusLijst.get(i));
-                jTextArea2.append(VirusLijst1.get(i));
-                jTextArea2.append("\n");
+            jTextArea2.append(VirusLijst1.get(i));
+            jTextArea2.append("\n");
 
-            }
-        
+        }
+
         String HostName2 = jComboBox5.getSelectedItem().toString();
-        ArrayList<String> VirusLijst2 = Logic.Test(j,k,l,HostName2,Class);
-        
+        ArrayList<String> VirusLijst2 = Logic.Test(j, k, l, HostName2, Class);
+
         for (int i = 0; i < VirusLijst2.size(); i++) {
-                jTextArea1.append(VirusLijst2.get(i));
-                jTextArea1.append("\n");
+            jTextArea1.append(VirusLijst2.get(i));
+            jTextArea1.append("\n");
 
-            }
-        
-        ArrayList<String> CompareList=Logic.Compare(VirusLijst1, VirusLijst2);
+        }
+
+        ArrayList<String> CompareList = Logic.Compare(VirusLijst1, VirusLijst2);
         for (int i = 0; i < CompareList.size(); i++) {
-                jTextArea3.append(CompareList.get(i));
-                jTextArea3.append("\n");
+            jTextArea3.append(CompareList.get(i));
+            jTextArea3.append("\n");
         }
-        /*
-        
-        
-        
-        
-        
-        if (k == 1) {
-            jTextArea2.selectAll();
-            jTextArea2.replaceSelection("");
-            String HostName1 = jComboBox4.getSelectedItem().toString();
-            ArrayList<String> VirusLijst1 = Logic.Virus1(HostName1);
-            Collections.sort(VirusLijst1);
-            //jTextArea2.append(VirusLijst.toString());
-            for (int i = 0; i < VirusLijst1.size(); i++) {
-                //  System.out.println(VirusLijst.get(i));
-                jTextArea2.append(VirusLijst1.get(i));
-                jTextArea2.append("\n");
 
-            }
-            
-            //invullen Viruslijst2  
-            jTextArea1.selectAll();
-            jTextArea1.replaceSelection("");
-            String HostName2 = jComboBox5.getSelectedItem().toString();
-            ArrayList<String> VirusLijst2 = Logic.Virus2(HostName2);
-            Collections.sort(VirusLijst2);
-            //jTextArea2.append(VirusLijst.toString());
-            for (int u = 0; u < VirusLijst2.size(); u++) {
-                //  System.out.println(VirusLijst.get(i));
-                jTextArea1.append(VirusLijst2.get(u));
-                jTextArea1.append("\n");
-            }
-
-            jTextArea3.selectAll();
-            jTextArea3.replaceSelection("");
-            for (String line1 : jTextArea2.getText().split("\\n")) {
-                for (String line2 : jTextArea1.getText().split("\\n")) {
-                    if (line1.equals(line2)) {
-                        jTextArea3.append(line2);
-                        jTextArea3.append("\n");
-                    }
-                }
-            }
-
-        }
-        
-        //geen radio boxes zijn gechecked
-        if (j == 0 && k == 0 && l == 0) {
-
-            jTextArea2.selectAll();
-            jTextArea2.replaceSelection("");
-            String HostName1 = jComboBox4.getSelectedItem().toString();
-            ArrayList<String> VirusLijst1 = Logic.Virus1SSDNA(HostName1);
-            //jTextArea2.append(VirusLijst.toString());
-            for (int i = 0; i < VirusLijst1.size(); i++) {
-                //  System.out.println(VirusLijst.get(i));
-                jTextArea2.append(VirusLijst1.get(i));
-                jTextArea2.append("\n");
-
-            }
-            
-            //invullen Viruslijst2  
-            jTextArea1.selectAll();
-            jTextArea1.replaceSelection("");
-            String HostName2 = jComboBox5.getSelectedItem().toString();
-            ArrayList<String> VirusLijst2 = Logic.Virus2SSDNA(HostName2);
-            //jTextArea2.append(VirusLijst.toString());
-            for (int u = 0; u < VirusLijst2.size(); u++) {
-                //  System.out.println(VirusLijst.get(i));
-                jTextArea1.append(VirusLijst2.get(u));
-                jTextArea1.append("\n");
-            }
-
-            jTextArea3.selectAll();
-            jTextArea3.replaceSelection("");
-            for (String line1 : jTextArea2.getText().split("\\n")) {
-                for (String line2 : jTextArea1.getText().split("\\n")) {
-                    if (line1.equals(line2)) {
-                        jTextArea3.append(line2);
-                        jTextArea3.append("\n");
-                    }
-                }
-            }
-
-        }
-        
-        
-        //op classification gesorteerd
-        String Class = jComboBox1.getSelectedItem().toString();
-        if (j == 1) {
-            if (Class.contains("ssDNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1SSDNA(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2SSDNA(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("dsDNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1DSDNA(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2DSDNA(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("ssRNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1SSRNA(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2SSRNA(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("dsRNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1DSRNA(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2DSRNA(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("RetroVirus")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Retro(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Retro(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Satellite")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Satellite(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Satellite(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Viroids")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Viroids(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Viroids(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Unclassified")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Unclassified(HostName1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Unclassified(HostName2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            jTextArea3.selectAll();
-            jTextArea3.replaceSelection("");
-            for (String line1 : jTextArea2.getText().split("\\n")) {
-                for (String line2 : jTextArea1.getText().split("\\n")) {
-                    if (line1.equals(line2)) {
-                        jTextArea3.append(line2);
-                        jTextArea3.append("\n");
-                    }
-                }
-            }
-        }
-        //classification en op ID gesorteerd
-        
-        
-        
-        if (j == 1&&k==1) {
-            if (Class.contains("ssDNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1SSDNA(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2SSDNA(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("dsDNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1DSDNA(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2DSDNA(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("ssRNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1SSRNA(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2SSRNA(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("dsRNA")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1DSRNA(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2DSRNA(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("RetroVirus")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Retro(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Retro(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Satellite")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Satellite(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Satellite(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Viroids")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Viroids(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Viroids(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            if (Class.contains("Unclassified")) {
-
-                jTextArea2.selectAll();
-                jTextArea2.replaceSelection("");
-                String HostName1 = jComboBox4.getSelectedItem().toString();
-                ArrayList<String> VirusLijst1 = Logic.Virus1Unclassified(HostName1);
-                Collections.sort(VirusLijst1);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int i = 0; i < VirusLijst1.size(); i++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea2.append(VirusLijst1.get(i));
-                    jTextArea2.append("\n");
-
-                }
-                
-                //invullen Viruslijst2  
-                jTextArea1.selectAll();
-                jTextArea1.replaceSelection("");
-                String HostName2 = jComboBox5.getSelectedItem().toString();
-                ArrayList<String> VirusLijst2 = Logic.Virus2Unclassified(HostName2);
-                Collections.sort(VirusLijst2);
-                //jTextArea2.append(VirusLijst.toString());
-                for (int u = 0; u < VirusLijst2.size(); u++) {
-                    //  System.out.println(VirusLijst.get(i));
-                    jTextArea1.append(VirusLijst2.get(u));
-                    jTextArea1.append("\n");
-                }
-            }
-
-            jTextArea3.selectAll();
-            jTextArea3.replaceSelection("");
-            for (String line1 : jTextArea2.getText().split("\\n")) {
-                for (String line2 : jTextArea1.getText().split("\\n")) {
-                    if (line1.equals(line2)) {
-                        jTextArea3.append(line2);
-                        jTextArea3.append("\n");
-                    }
-                }
-            }
-        }
-        */
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+        if (l == 0) {
+            l = 1;
+        } else {
+            l = 0;
+        }
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -924,6 +384,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private static javax.swing.JRadioButton jRadioButton2;
+    private static javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -931,7 +392,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
-private int j = 0;
+    private int j = 0;
     private int k = 0;
     private int l = 0;
 }

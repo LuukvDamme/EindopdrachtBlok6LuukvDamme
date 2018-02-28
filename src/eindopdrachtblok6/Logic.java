@@ -1,5 +1,5 @@
 /*
- * Methods om Virus classes aan te maken en arraylists
+ * Methods om Virus object aan te maken en arraylists stoppen
  * 
  * 
  */
@@ -29,7 +29,13 @@ public class Logic {
     static public ArrayList<String> Virus2Lijst = new ArrayList<>();
     static public ArrayList<String> CompareList = new ArrayList<>();
 
-//readfile method, returned arraylist met Virus objecten
+/**
+ * 
+ * @return
+ * @throws FileNotFoundException
+ * @throws IOException 
+ * //readfile method, returned arraylist met Virus objecten
+ */
     public static ArrayList<Virus> ReadFile() throws FileNotFoundException, IOException {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
@@ -72,6 +78,7 @@ public class Logic {
             if (HostLijst.contains(a.getHostName())) {
             } else {
                 Host = (a.getHostName());
+                //Host = (a.getHostTaxID()+"("+a.getHostName()+")");
                 HostLijst.add(Host);
                 Host = "";
             }
@@ -81,54 +88,50 @@ public class Logic {
 
     //process knop is ingedrukt
     public static ArrayList<String> Test(int J, int K, int L, String HostName, String Class) {
-        try{
-        VirusLijst.clear();
+        try {
+            VirusLijst.clear();
 
-        for (int i = 0; i < Lijst.size(); i++) {
-            Virus a = Lijst.get(i);
+            for (int i = 0; i < Lijst.size(); i++) {
+                Virus a = Lijst.get(i);
 
-            if (J == 1) {
+                if (J == 1) {
 
-                if (HostName.equals(a.getHostName())) {
-                    if (a.getLineage().contains(Class)) {
+                    if (HostName.equals(a.getHostName())) {
+                        if (a.getLineage().contains(Class)) {
+                            VirusLijst.add(a.getID());
+                        }
+                    }
+                } else {
+                    if (HostName.equals(a.getHostName())) {
                         VirusLijst.add(a.getID());
                     }
                 }
-            } else {
-                if (HostName.equals(a.getHostName())) {
-                    VirusLijst.add(a.getID());
-                }
             }
-        }
-            
-        
-        if (K==1){
-            Collections.sort(VirusLijst);
-        }
-        }
-        catch(Exception ex){
+
+            if (K == 1) {
+                Collections.sort(VirusLijst);
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Virus ID's verkrijgen");
         }
         return VirusLijst;
     }
 
-   
 //overeenkomsten
     static ArrayList<String> Compare(ArrayList<String> VirusLijst1, ArrayList<String> VirusLijst2) {
-        try{
-        CompareList.clear();
-        for (int i = 0; i < VirusLijst1.size(); i++) {
-            for (int k = 0; k < VirusLijst2.size(); k++) {
-                if (VirusLijst1.get(i).equals(VirusLijst2.get(k))) {
-                    CompareList.add(VirusLijst1.get(i));
+        try {
+            CompareList.clear();
+            for (int i = 0; i < VirusLijst1.size(); i++) {
+                for (int k = 0; k < VirusLijst2.size(); k++) {
+                    if (VirusLijst1.get(i).equals(VirusLijst2.get(k))) {
+                        CompareList.add(VirusLijst1.get(i));
+                    }
                 }
             }
-        }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "fout bij de overeenkomsten bepalen");
         }
         return CompareList;
     }
-    
+
 }

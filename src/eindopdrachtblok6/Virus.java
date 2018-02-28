@@ -1,5 +1,5 @@
 /*
- * Virus class met setters en getters
+ * Virus class met setters en getters en compare to methode
  * 
  * 
  */
@@ -9,7 +9,8 @@ package eindopdrachtblok6;
  * @since 07/02/2018
  * @author Luuk
  */
-public class Virus implements Comparable{
+public class Virus implements Comparable {
+
     private String ID;
     private String Name;
     private String Lineage;
@@ -23,15 +24,13 @@ public class Virus implements Comparable{
     private String Pmid;
     private String Evidence;
 
-      public String getKEGGDisease() {
+    public String getKEGGDisease() {
         return KEGGDisease;
     }
 
-    
     public void setKEGGDisease(String KEGGDisease) {
         this.KEGGDisease = KEGGDisease;
     }
-   
 
     public void setID(String ID) {
         this.ID = ID;
@@ -123,7 +122,7 @@ public class Virus implements Comparable{
 
     @Override
     public int compareTo(Object t) {
-        if (t instanceof Virus){
+        if (t instanceof Virus) {
             String IDname1 = this.ID;
             String IDname2 = ((Virus) t).getID();
             return IDname1.compareTo(IDname2);
