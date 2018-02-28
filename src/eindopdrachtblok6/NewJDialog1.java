@@ -1,8 +1,3 @@
-/*
- * GUI gegenereerd met de GUI designer
- * Hierin worden methods uit Logic aan geroepen
- * 
- */
 package eindopdrachtblok6;
 
 import java.io.IOException;
@@ -12,7 +7,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * GUI gegenereerd met de GUI designer
+ * Hierin worden methods uit Logic aan geroepen
  * @since 07/02/2018
+ * @version 2
  * @author Luuk
  */
 public class NewJDialog1 extends javax.swing.JDialog {
@@ -54,7 +52,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -136,13 +133,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
 
         jLabel8.setText("Virus Lijst 1");
 
-        jRadioButton3.setText("Aantal hosts");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,8 +148,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton2)
                             .addComponent(jLabel1)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3))
+                            .addComponent(jRadioButton1))
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -221,9 +210,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3)))
+                        .addComponent(jRadioButton2)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -298,7 +285,7 @@ public class NewJDialog1 extends javax.swing.JDialog {
             jTextArea2.append("\n");
 
         }
-
+            
         String HostName2 = jComboBox5.getSelectedItem().toString();
         ArrayList<String> VirusLijst2 = Logic.Test(j, k, l, HostName2, Class);
 
@@ -307,23 +294,15 @@ public class NewJDialog1 extends javax.swing.JDialog {
             jTextArea1.append("\n");
 
         }
-
-        ArrayList<String> CompareList = Logic.Compare(VirusLijst1, VirusLijst2);
-        for (int i = 0; i < CompareList.size(); i++) {
-            jTextArea3.append(CompareList.get(i));
+        
+            
+        ArrayList<String> CompareLijst = Logic.Compare(VirusLijst1, VirusLijst2);
+        for (int i = 0; i < CompareLijst.size(); i++) {
+            jTextArea3.append(CompareLijst.get(i));
             jTextArea3.append("\n");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-        if (l == 0) {
-            l = 1;
-        } else {
-            l = 0;
-        }
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,7 +363,6 @@ public class NewJDialog1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private static javax.swing.JRadioButton jRadioButton2;
-    private static javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -1,12 +1,9 @@
-/*
- * Virus class met setters en getters en compare to methode
- * 
- * 
- */
 package eindopdrachtblok6;
 
 /**
+ * Virus class met setters en getters en compare to methode
  * @since 07/02/2018
+ * @version 2
  * @author Luuk
  */
 public class Virus implements Comparable {
