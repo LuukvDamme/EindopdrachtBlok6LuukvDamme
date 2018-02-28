@@ -1,8 +1,3 @@
-/*
- * Methods om Virus object aan te maken en arraylists stoppen
- * 
- * 
- */
 package eindopdrachtblok6;
 
 import java.io.BufferedReader;
@@ -17,26 +12,28 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
+ * Methods om Virus object aan te maken en arraylists stoppen
  * @since 07/02/2018
+ * @version 2
  * @author Luuk
  */
 public class Logic {
 
     static private String Host;
-    static public ArrayList<Virus> Lijst = new ArrayList<>();
-    static public ArrayList<String> HostLijst = new ArrayList<>();
-    static public ArrayList<String> VirusLijst = new ArrayList<>();
-    static public ArrayList<String> Virus2Lijst = new ArrayList<>();
-    static public ArrayList<String> CompareList = new ArrayList<>();
+    static private ArrayList<Virus> Lijst = new ArrayList<>();
+    static private ArrayList<String> HostLijst = new ArrayList<>();
+    static private ArrayList<String> VirusLijst = new ArrayList<>();
+    static private ArrayList<String> CompareList = new ArrayList<>();
 
-/**
- * 
- * @return
- * @throws FileNotFoundException
- * @throws IOException 
- * //readfile method, returned arraylist met Virus objecten
- */
+    /**
+     * methode om het bestand in te lezen
+     *
+     * @return Arraylist met virus objecten
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static ArrayList<Virus> ReadFile() throws FileNotFoundException, IOException {
+
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         int returnValue = jfc.showOpenDialog(null);
@@ -47,7 +44,7 @@ public class Logic {
             //System.out.println(selectedFile.getAbsolutePath());
             try (BufferedReader br = new BufferedReader(new FileReader(selectedFile.getAbsolutePath()))) {
                 String line;
-                //creeer objecten, eerste in de arraylist is niet nuttig voor dit programma.
+
                 while ((line = br.readLine()) != null) {
                     String[] colom = line.split("\t", -1);
                     Virus temp = new Virus();
@@ -66,13 +63,21 @@ public class Logic {
                     Lijst.add(temp);
                     //System.out.println(temp.getLineage());
                 }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "fout bij het bestand lezen");
             }
         }
         return Lijst;
     }
 
-    //HostLijst aanmaken
+    /**
+     * methode om uniek host namen uit virus objecten arraylist in een arraylist
+     * te stoppen
+     *
+     * @return Arraylist met Host namen
+     */
     public static ArrayList<String> Host() {
+
         for (int i = 1; i < Lijst.size(); i++) {
             Virus a = Lijst.get(i);
             if (HostLijst.contains(a.getHostName())) {
@@ -86,9 +91,18 @@ public class Logic {
         return HostLijst;
     }
 
-    //process knop is ingedrukt
+    /**
+     * methode om arraylist van virus ID's te maken van geselecteerde Host naam
+     * als radiobutton ID's is geselecteerd is kan deze methode de lijst
+     * sorteren als radiobutton classificatie is geselecteerd kan deze methode
+     * de arraylist filtreren op de classificatie
+     *
+     * @return Arraylist met virus ID's
+     */
     public static ArrayList<String> Test(int J, int K, int L, String HostName, String Class) {
+
         try {
+
             VirusLijst.clear();
 
             for (int i = 0; i < Lijst.size(); i++) {
@@ -114,11 +128,17 @@ public class Logic {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Virus ID's verkrijgen");
         }
-        return VirusLijst;
+        return new ArrayList<String>(VirusLijst);
     }
 
-//overeenkomsten
+    /**
+     * methode om het twee Virus ID arraylists met elkaar te vergelijken of er
+     * twee dezelfde virus ID's inzitten
+     *
+     * @return Arraylist met virus ID's
+     */
     static ArrayList<String> Compare(ArrayList<String> VirusLijst1, ArrayList<String> VirusLijst2) {
+
         try {
             CompareList.clear();
             for (int i = 0; i < VirusLijst1.size(); i++) {
